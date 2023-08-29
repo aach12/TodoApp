@@ -3,7 +3,7 @@ const navbar = document.querySelector('#navbar');
 const createNavHome = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-            <p class="font-bold text-xl text-white">TodoApp</p>
+            <p class="font-bold text-xl text-white font-serif">ContactList</p>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -16,17 +16,17 @@ const createNavHome = () => {
             <!--version de escritorio-->
             <div class="hidden md:flex flex-row gap-4">
                 <a href="/login/"
-                    class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Login</a>
+                    class="transition delay-150 duration-300 ease-in-out text-white font-bold hover:bg-blue-800 py-2 px-4 rounded-lg font-serif">Login</a>
                 <a href="/signup/"
-                    class="transition ease-in-out text-black font-bold bg-slate-50 hover:bg-slate-200 py-2 px-4 rounded-lg">Registro</a>
+                    class="transition delay-150 duration-300 ease-in-out text-black font-bold bg-slate-50 hover:bg-blue-800 py-2 px-4 rounded-lg font-serif">Signup</a>
             </div>
 
             <!--menu movil-->
             <div class="bg-slate-900/60 fixed top-16 right-0 left-0 bottom-0 justify-center items-center flex-col gap-4 hidden">
         <a href="/login/"
-            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Login</a>
+            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Login</a>
         <a href="/signup/"
-            class="transition ease-in-out text-black font-bold bg-slate-50 hover:bg-slate-200 py-2 px-4 rounded-lg">Registro</a>
+            class="transition ease-in-out text-black font-bold bg-slate-50 hover:bg-slate-200 py-2 px-4 rounded-lg font-serif">Signup</a>
     </div>
 
         </div>
@@ -37,7 +37,7 @@ const createNavHome = () => {
 const createNavSignup = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-            <p class="font-bold text-xl text-white">TodoApp</p>
+<a class="font-bold text-xl text-white font-serif" href="http://localhost:3003/" style="cursor: pointer;">ContactList</a>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -50,13 +50,13 @@ const createNavSignup = () => {
             <!--version de escritorio-->
             <div class="hidden md:flex flex-row gap-4">
                 <a href="/login/"
-                    class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Login</a>
+                    class="transition ease-in-out text-white font-bold delay-200 duration-300 hover:bg-blue-800 py-2 px-4 rounded-lg font-serif">Login</a>
             </div>
 
             <!--menu movil-->
             <div class="bg-slate-900/60 fixed top-16 right-0 left-0 bottom-0 justify-center items-center flex-col gap-4 hidden">
         <a href="/login/"
-            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Login</a>
+            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Login</a>
     </div>
 
         </div>
@@ -66,7 +66,7 @@ const createNavSignup = () => {
 const createNavLogin = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-            <p class="font-bold text-xl text-white">TodoApp</p>
+            <a class="font-bold text-xl text-white font-serif" href="http://localhost:3003/" style="cursor: pointer;">ContactList</a>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -79,13 +79,13 @@ const createNavLogin = () => {
             <!--version de escritorio-->
             <div class="hidden md:flex flex-row gap-4">
                 <a href="/signup/"
-                    class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Registro</a>
+                    class="transition ease-in-out text-white font-bold delay-200 duration-300 hover:bg-blue-800 py-2 px-4 rounded-lg font-serif">Signup</a>
             </div>
 
             <!--menu movil-->
             <div class="bg-slate-900/60 fixed top-16 right-0 left-0 bottom-0 justify-center items-center flex-col gap-4 hidden">
         <a href="/signup/"
-            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">signup</a>
+            class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Signup</a>
     </div>
 
         </div>
@@ -95,7 +95,7 @@ const createNavLogin = () => {
 const createNavTodos = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-            <p class="font-bold text-xl text-white">TodoApp</p>
+            <p class="font-bold text-xl text-white font-serif">ContactList</p>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -107,12 +107,12 @@ const createNavTodos = () => {
 
             <!--version de escritorio-->
             <div class="hidden md:flex flex-row gap-4">
-                <button id="close-btn" class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Cerrar sesion</button>
+                <button id="close-btn" class="transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-red-400 py-2 px-4 rounded-lg font-serif">Cerrar sesion</button>
             </div>
 
             <!--menu movil-->
             <div class="bg-slate-900/60 fixed top-16 right-0 left-0 bottom-0 justify-center items-center flex-col gap-4 hidden">
-            <button id="close-btn" class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg">Cerrar sesion</button>
+            <button id="close-btn" class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Cerrar sesion</button>
     </div>
 
         </div>
