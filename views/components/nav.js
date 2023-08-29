@@ -37,7 +37,7 @@ const createNavHome = () => {
 const createNavSignup = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-<a class="font-bold text-xl text-white font-serif" href="http://localhost:3003/" style="cursor: pointer;">ContactList</a>
+<a class="font-bold text-xl text-white font-serif" href="https://todo-list-app-ol7u.onrender.com/" style="cursor: pointer;">ContactList</a>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -66,7 +66,7 @@ const createNavSignup = () => {
 const createNavLogin = () => {
     navbar.innerHTML = `
 <div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
-            <a class="font-bold text-xl text-white font-serif" href="http://localhost:3003/" style="cursor: pointer;">ContactList</a>
+            <a class="font-bold text-xl text-white font-serif" href="https://todo-list-app-ol7u.onrender.com/" style="cursor: pointer;">ContactList</a>
 
             <!--version movil-->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
