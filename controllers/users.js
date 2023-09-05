@@ -61,6 +61,7 @@ usersRouter.patch('/:id/:token', async (request,response) => {
     const token = request.params.token;
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const id = decodedToken.id;
+    console.log(id);
     await User.findByIdAndUpdate(id, { verified: true });
     return response.sendStatus(200);
 

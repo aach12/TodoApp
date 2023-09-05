@@ -1,5 +1,5 @@
 const PAGE_URL = process.env.NODE_ENV === 'production'
-    ? 'localhost:3003'
+    ? 'http://localhost:3003/'
     : 'https://todo-list-app-ol7u.onrender.com'
 
 
