@@ -1,5 +1,5 @@
 const PAGE_URL = process.env.NODE_ENV === 'production'
-    ? 'verify'
+    ? 'placeholder'
     : 'https://todo-list-app-ol7u.onrender.com/login/'
 
 
