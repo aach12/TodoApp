@@ -48,7 +48,7 @@ usersRouter.post('/', async (request, response) => {
       from: process.env.EMAIL_USER, // sender address
       to: savedUser.email, // list of receivers
       subject: 'Verificacion de usuario', // Subject line
-      html: `<a href="${PAGE_URL}/verify/${savedUser.id}/${id}/${token}">Verificar correo</a>`, // html body
+      html: `<a href="${PAGE_URL}/verify/${savedUser.id}/${token}">Verificar correo</a>`, // html body
     });
 
     return response.status(201).json('Usuario creado. Por favor verifica tu correo');

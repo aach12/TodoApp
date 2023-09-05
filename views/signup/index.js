@@ -42,9 +42,7 @@ formBtn.disabled = nameValidation && emailValidation && passwordValidation && ma
 // Events
 
 nameInput.addEventListener('input', e => {
-    console.log('hh');
     nameValidation = NAME_VALIDATION.test(e.target.value);
-    console.log(nameValidation);
     validation(nameInput, nameValidation);
 });
 
