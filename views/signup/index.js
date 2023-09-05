@@ -30,6 +30,7 @@ formBtn.disabled = nameValidation && emailValidation && passwordValidation && ma
         input.classList.add('focus:outline-indigo-700');
     } else if (regexValidation) {
      input.classList.remove('focus:outline-indigo-700');
+     input.classList.remove('outline-red-700', 'outline-2', 'outline');
      input.classList.add('outline-green-700', 'outline-2', 'outline');
     } else if (!regexValidation) {
       input.classList.remove('focus:outline-indigo-700');
@@ -41,7 +42,9 @@ formBtn.disabled = nameValidation && emailValidation && passwordValidation && ma
 // Events
 
 nameInput.addEventListener('input', e => {
+    console.log('hh');
     nameValidation = NAME_VALIDATION.test(e.target.value);
+    console.log(nameValidation);
     validation(nameInput, nameValidation);
 });
 
