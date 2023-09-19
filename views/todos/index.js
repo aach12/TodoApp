@@ -1,113 +1,146 @@
-const input = document.querySelector('input');
-const ul = document.querySelector('ul');
-const addBtn = document.querySelector('.add-btn');
-const invalidCheck = document.querySelector('.invalid-check');
-const form = document.querySelector('#form');
-const totalCountSpan = document.querySelector('.total-count');
-const completedCountSpan = document.querySelector('.completed-count');
-const incompletedCountSpan = document.querySelector('.incompleted-count');
+var Contact = function (name, email, phone) {
+	this.name = name;
+	this.email = email;
+	this.phone = phone;
+}
 
-const totalCount = () => {
-	const howMany = document.querySelector('ul').children.length; 
-	totalCountSpan.innerHTML = howMany;
-};
+const inputName = document.querySelector('#inputName');
+const inputEmail = document.querySelector('#inputEmail');
+const inputPhone = document.querySelector('#inputPhone');
+const addButton = document.querySelector('#addbutton');
 
-const todoCount = () => {
-	totalCount();
-};
 
-form.addEventListener('submit', async e => {
-	e.preventDefault();
+// regex validation
 
-	// Check if the input is empty
+const EMAIL_VALIDATION = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const NAME_VALIDATION = /^[A-Z\u00d1][a-zA-Z-ÿ\u00f1\u00d1]+(\s*[A-Z\u00d1][a-zA-Z-ÿáéíóú\u00f1\u00d1\s]*)$/;
+const PHONE_VALIDATIO = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/;
+
+// Validatons
+let nameValidation = false;
+let emailValidation = false;
+let phoneValidation = false;
+
+const validation = (input, regexValidation) => {
+	addButton.disabled = nameValidation && emailValidation && phoneValidation ? false : true;
+	console.log(addButton, nameValidation, emailValidation, phoneValidation); 
+
 	if (input.value === '') {
-		input.classList.remove('focus:ring-2', 'focus:ring-violet-600');
-		input.classList.add('focus:ring-2', 'focus:ring-rose-600');
-		invalidCheck.classList.remove('hidden');
-		return
+		input.classList.remove('focus:outline-red-700,');
+		input.classList.remove('focus:outline-green-700');
+		input.classList.add('focus:outline-indigo-700');
+	} else if (regexValidation) {
+		input.classList.remove('focus:outline-indigo-700');
+		input.classList.add('focus:outline-green-700');
+	} else if (!nameValidation){
+		input.classList.remove('focus:outline-indigo-700');
+		input.classList.remove('focus:outline-green-700');
+		input.classList.add('focus:outline-red-700');
 	}
+};
 
-	// Remove classes and hide invalidCheck
-	input.classList.remove('focus:ring-2', 'focus:ring-rose-600', 'border-2', 'border-rose-600');
-	input.classList.add('focus:ring-2', 'focus:ring-violet-600');
-	invalidCheck.classList.add('hidden');
+// Events
 
-	// Create list item
-
-	const { data } = await axios.post('/api/todos', { text: input.value });
-	console.log(data);
-
-	const listItem = document.createElement('li');
-	listItem.id = data.id;
-	listItem.classList.add('flex', 'flex-row');
-	listItem.innerHTML = `
-		<div class="group grow flex flex-row justify-between">
-			<button class=" delete-icon w-12 md:w-14 hidden group-hover:flex group-hover:justify-center group-hover:items-center cursor-pointer bg-red-500 origin-left ease-out duration-300">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
-			<p class="p-4 break-words grow">${data.text}</p>
-		</div>
-
-	`;
-
-	// Append listItem
-	ul.append(listItem);
-
-	// Empty input
-	input.value = ''
-
-	todoCount();
+inputName.addEventListener('input', e => {
+	nameValidation = NAME_VALIDATION.test(e.target.value);
+	validation(inputName,nameValidation);
 });
 
-ul.addEventListener('click', async e => {
+inputEmail.addEventListener('input', e => {
+	emailValidation = EMAIL_VALIDATION.test(e.target.value);
+ 	validation(inputEmail,emailValidation);
+});
 
-	// Select delete-icon
-	if (e.target.closest('.delete-icon')) {
-		const li = e.target.closest('.delete-icon').parentElement.parentElement;
-		await axios.delete(`/api/todos/${li.id}`);
-		li.remove();
-		todoCount();
-	}
+ inputPhone.addEventListener('input', e => {
+	phoneValidation = PHONE_VALIDATIO.test(e.target.value);
+	validation(inputPhone,phoneValidation);
+ });
 
 
+var contacts = [];
 
-		// Save in local storage
-		todoCount();
-		localStorage.setItem('todoList', ul.innerHTML);
-	}
-);
+var obtenercontactos = function () {
+	peticion('http://localhost:3003/obtenercontactos', 'get')
+		.then(data => {
+			contacts = []
+			if (Array.isArray(data)) {
 
-(async () => {
-	try {
-		const { data } = await axios.get('/api/todos', {
-			withCredentials: true
+				contacts = data
+			}
+			console.log(data);
+			listContacts();
 		});
+}
 
-		data.forEach(todo => {
-
-			const listItem = document.createElement('li');
-			listItem.id = todo.id;
-			listItem.classList.add('flex', 'flex-row');
-			listItem.innerHTML = `
-				<div class="group grow flex flex-row justify-between">
-					<button class="delete-icon w-12 md:w-14 hidden group-hover:flex group-hover:justify-center group-hover:items-center cursor-pointer bg-red-500 origin-left ease-out duration-300">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-						</svg>
-					</button>
-					<p class="p-4 break-words grow">${todo.text}</p>
-				</div>
-				
-			`;
-
-			ul.append(listItem);
-		})
-		todoCount();
-
-	} catch (error) {
-		window.location.pathname = '/login'
+var listContacts = function () {
+	document.getElementById('displayContacts').innerHTML = " ";
+	for (var i = 0; i < contacts.length; i++) {
+		document.getElementById('displayContacts').innerHTML += '<tr><td id="name' + i + '" class="border-blue-400 mt-6 flex space-x-2 mx-2 font-serif rounded-tl-lg rounded-tr-lg p-2 text-white bg-blue-950 focus:outline-indigo-700">' + contacts[i].name + '</td><td id="email' + i + '" class="flex space-x-2 mx-2 font-serif p-2 text-white bg-blue-950 focus:outline-indigo-700">' + contacts[i].email + '</td><td id="phone' + i + '" class="flex space-x-2 mx-2 font-serif rounded-br-lg rounded-bl-lg p-2 text-white bg-blue-950 focus:outline-indigo-700">' + contacts[i].phone + '</td><td><button class="editbut mx-2 bg-blue-950 transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-blue-600 py-1 px-2 rounded-full font-serif"  onclick=updateContact(' + i + ')>Edit</button></div><button class="deletebut bg-blue-950 transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-blue-600 py-1 px-2 rounded-full font-serif" onclick=deleteContact(' + i + ')>Delete</button></td></tr>';
 	}
+};
 
-})();
+var guardarcontactos = function () {
+	peticion('http://localhost:3003/guardarcontactos', 'post', contacts)
+		.then(data => {
+			console.log(data);
+		});
+}
+
+var addNewContact = function () {
+	var name = document.getElementById('inputName').value;
+	var email = document.getElementById('inputEmail').value;
+	var phone = document.getElementById('inputPhone').value;
+	var contact = new Contact(name, email, phone);
+	contacts.push(contact);
+	guardarcontactos();
+	listContacts();
+}
+
+var deleteContact = function (i) {
+	contacts.splice(i, 1);
+	guardarcontactos();
+	listContacts();
+}
+
+var updateContact = function (i) {
+	contactId = i;
+	document.getElementById("inputName").value = contacts[i].name;
+	document.getElementById("inputEmail").value = contacts[i].email;
+	document.getElementById("inputPhone").value = contacts[i].phone;
+	// addButton.innerHTML = 'jgjgjg'
+	// addButton.disabled = false;
+	document.getElementById("submitButtons").innerHTML = '<button id="updateButton" class="editbut bg-blue-950 transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-blue-600 py-2 px-4 rounded-lg font-serif" onclick=submitUpdatedContact(contactId)>Change</button>';
+
+}
+
+var submitUpdatedContact = function (i) {
+	contacts[i].name = document.getElementById("inputName").value;
+	contacts[i].email = document.getElementById("inputEmail").value;
+	contacts[i].phone = document.getElementById("inputPhone").value;
+	document.getElementById("submitButtons").innerHTML = '<button type="button" id="addButton" class="agregarbut bg-blue-950 transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-blue-600 py-2 px-4 rounded-lg font-serif" onclick="addNewContact()">Add</button>';
+	// addButton.disabled = true
+	document.getElementById("inputName").value = "";
+	document.getElementById("inputEmail").value = "";
+	document.getElementById("inputPhone").value = "";
+
+	guardarcontactos();
+	listContacts();
+}
+
+obtenercontactos();
+
+async function peticion(url, method, data = {}) {
+
+	var options = {
+		method: method,
+		headers: {
+			'Access-Control-Allow-Origin': '1',
+			'Content-Type': 'application/json'
+		},
+	}
+	if (method == "post") {
+		options.body = JSON.stringify(data)
+	}
+	const response = await fetch(url, options);
+	return response.json();
+}

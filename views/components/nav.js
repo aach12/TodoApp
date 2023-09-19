@@ -107,12 +107,12 @@ const createNavTodos = () => {
 
             <!--version de escritorio-->
             <div class="hidden md:flex flex-row gap-4">
-                <button id="close-btn" class="transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-red-400 py-2 px-4 rounded-lg font-serif">Cerrar sesion</button>
+                <button id="close-btn" class="transition ease-in-out text-white font-bold delay-300 duration-300 hover:bg-red-400 py-2 px-4 rounded-lg font-serif">Logout</button>
             </div>
 
             <!--menu movil-->
             <div class="bg-slate-900/60 fixed top-16 right-0 left-0 bottom-0 justify-center items-center flex-col gap-4 hidden">
-            <button id="close-btn" class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Cerrar sesion</button>
+            <button id="close-btn" class="transition ease-in-out text-white font-bold hover:bg-indigo-800 py-2 px-4 rounded-lg font-serif">Logout</button>
     </div>
 
         </div>

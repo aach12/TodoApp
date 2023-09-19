@@ -12,6 +12,7 @@ const todosRouter = require('./controllers/todos');
 const { userExtractor } = require('./middleware/auth');
 const logoutRouter = require('./controllers/logout');
 const { MONGO_URI } = require('./config');
+const contactsRouter = require('./controllers/contacts');
 
 (async() => {
     try {
@@ -44,6 +45,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 app.use('/api/todos', userExtractor, todosRouter);
+// app.use('/api/contacts', userExtractor, contactsRouter);
 
 app.use(morgan('tiny'));
 

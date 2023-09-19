@@ -1,6 +1,6 @@
 const PAGE_URL = process.env.NODE_ENV === 'production'
-    ? 'http://localhost:3003/'
-    : 'https://todo-list-app-ol7u.onrender.com'
+    ? 'https://todo-list-app-ol7u.onrender.com'
+    : 'http://localhost:3003'
 
 
     const MONGO_URI = process.env.NODE_ENV === 'production'
